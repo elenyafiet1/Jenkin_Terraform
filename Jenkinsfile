@@ -1,15 +1,14 @@
 pipeline {
     agent any
-    
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIAXKUH3BR5ZAS3J547')
-        AWS_SECRET_ACCESS_KEY = credentials('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')
+
+    tools {
+        git 'Git' // Ensure this matches the Git configuration in Jenkins
     }
 
     stages {
-        stage('Verify AWS Credentials') {
+        stage('Checkout SCM') {
             steps {
-                sh 'aws sts get-caller-identity'
+                checkout scm
             }
         }
     }
